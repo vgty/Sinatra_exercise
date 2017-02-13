@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Spriggly-Wiggly</title>
+    <link rel='stylesheet' href='/css/spriggly_wiggly_style.css' type='text/css' ></link>
+  </head>
+  <body>
+    <h1>Spriggly-Wiggly.io</h1>
+    <h1>We Serve(er) Foodz!</h1>
+    <h3>look at our restaurants</h3>
+    <% restaurants.each do |restaurant| %>
+      <div class='restaurant-display-tile'>
+        <form action='/restaurants/<%= restaurant.id %>' method='POST' class='pull-right'>
+          <input type='hidden' name='_method' value='DELETE'/>
+          <button type='submit' class='super-sport'>X</button>
+        </form>
+        <p> Restaurant id: <%= restaurant.id %> '<%= restaurant.name %>' located at '<%= restaurant.location %>' </p>
+        <p>has <%= restaurant.orders.count %> order(s).</p>
+        <% restaurant.orders.each do |order| %>
+          <h4>
+            Order id: <%= order.id %> is '<%= order.description %>'
+            <a href='/orders/<%= order.id %>/edit' class='super-sport'>edit order</a>
+            <%# a form that allows an order to be destroyed %>
+            <form action='/orders' method='POST' class='inline' >
+              <input type='hidden' name='order_id' value='<%= order.id %>'>
+              <input type='hidden' name='_method' value='DELETE'>
+              <input type='submit' value='destroy order' class='super-sport'>
+            </form>
+
+          </h4>
+        <% end %>
+        <form action='/orders' method='POST' class='centered' >
+          <input type='text' name='description' required />
+          <input type='hidden' name='restaurant_id' value='<%= restaurant.id %>'>
+          <input type='submit' value='create order' class='super-sport'>
+        </form>
+        
+        <%# a link that routes to an edit restaurant form %>
+        <a href='/restaurants/<%= restaurant.id %>/edit'>edit restaurant</a>
+      </div>
+    <% end %>
+    <h4><a href='/restaurants/create'>Create a New Restaurant</a></h4>
+
+  </body>
+</html>

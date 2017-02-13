@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Spriggly-Wiggly</title>
+    <style>
+      p, h1, h2, h3, h4, ul, li, a, label {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #157DA6;
+        text-align: center;
+      }
+      .centered {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>We Serve(er) Foodz!</h1>
+    <h3>Create a new restaurant!</h3>
+    <%# a form that can create a new restaurant %>
+    <form action='/restaurants' method='POST' class='centered'>
+      <label>name</label>
+      <input type='text' name='name' required/>
+      <label>location</label>
+      <input type='text' name='location' required/>
+      <input type='submit' value='create new restaurant' />
+    </form>
+    <h4><a href='/'>All Restaurants</a></h4>
+  </body>
+</html>
